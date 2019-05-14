@@ -18,7 +18,7 @@ func (s *Snowflake) Int64() int64 {
 	return int64(s.id)
 }
 
-// Increment gets the generated number on the process for the ID.
+// Increment gets the increment number which is incremented every time a ID is generated on the process.
 func (s *Snowflake) Increment() uint64 {
 	return s.id & 0xFFF
 }
@@ -31,11 +31,6 @@ func (s *Snowflake) InternalProcessID() uint64 {
 // InternalWorkerID gets the internal worker ID for this snowflake.
 func (s *Snowflake) InternalWorkerID() uint64 {
 	return (s.id & 0x3E0000) >> 17
-}
-
-// IsValid checks whether the snowflake is valid.
-func (s *Snowflake) IsValid() bool {
-	return (s.id>>22)+DiscordEpoch >= DiscordEpoch
 }
 
 // String gets the snowflake as a string.

@@ -5,12 +5,8 @@ import (
 )
 
 // ParseInt parses an int to a snowflake.
-func ParseInt(id int) (*Snowflake, error) {
-	if id < 0 {
-		return nil, newError("ID must be greater than 0", nil)
-	}
-
-	return &Snowflake{uint64(id)}, nil
+func ParseInt(id uint64) *Snowflake {
+	return &Snowflake{id}
 }
 
 // ParseString parses a string to a snowflake.
@@ -22,11 +18,15 @@ func ParseString(id string) (*Snowflake, error) {
 	return &Snowflake{i}, nil
 }
 
-// ParseEpochMilli parses a epoch milliseconds timestamp to a snowflake.
+// ParseEpochMilli parses an epoch milliseconds timestamp to a snowflake.
 func ParseEpochMilli(epoch uint64) (*Snowflake, error) {
 	if epoch < DiscordEpoch {
-		return nil, newError("Epoch milliseconds timestamp cannot be less than the Discord epoch", nil)
+		return nil, newError("Epoch cannot be earlier than the Discord epoch.", nil)
 	}
-
 	return &Snowflake{(epoch - DiscordEpoch) << 22}, nil
+}
+
+// ParseEpochSec parses an epoch seconds timestamp to a snowflake.
+func ParseEpochSec(epoch uint64) (*Snowflake, error) {
+	return ParseEpochMilli(epoch * 1000)
 }
