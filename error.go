@@ -1,6 +1,6 @@
 package dgoflake
 
-import "github.com/pkg/errors"
+import "errors"
 
 func newError(err string, cause error) error {
 	if cause != nil {
