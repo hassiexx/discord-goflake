@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.12.4
+      
+    working_directory: /go/src/github.com/hassieswift621/discord-goflake
+    
+    steps:
+      - checkout
+      - run: go test
+      - run: go test -bench=.
