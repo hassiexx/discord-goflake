@@ -8,7 +8,7 @@ The current version is 1.0.0.
 ## Tutorial
 **Retrieving timestamp from a raw string ID**
 ```go
-snowflake, err := dgoflake.ParseInt("577685297450582016")
+snowflake, err := dgoflake.ParseString("577685297450582016")
 if err == nil {
 	timestamp := snowflake.Timestamp()
 }
