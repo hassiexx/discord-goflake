@@ -5,28 +5,8 @@ jobs:
       - image: circleci/golang:1.12.4
       
     working_directory: /go/src/github.com/hassieswift621/discord-goflake
-
-    environment:
-      TEST_RESULTS: /tmp/test-results
-      
+    
     steps:
       - checkout
-      - run: mkdir -p $TEST_RESULTS
-      - restore_cache:
-          keys:
-            - v1-pkg-cache
-      - run: go get github.com/jstemmer/go-junit-report
-      
-      - run: go test -v 2>&1 | go-junit-report > ${TEST_RESULTS}/report.xml
-            
-      - save_cache:
-          key: v1-pkg-cache
-          paths:
-            - "/go/pkg"
-            
-      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: /tmp/test-results
-          destination: raw-test-output
-
-      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: /tmp/test-results
+      - run: go test
+      - run: go test -bench=.
