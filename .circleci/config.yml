@@ -8,6 +8,7 @@ jobs:
     
     steps:
       - checkout
+      - run: mkdir -p /tmp/test-results
       - run: gotestsum --junitfile /tmp/test-results/unit-tests.xml
       - store_test_results:
           path: /tmp/test-results
