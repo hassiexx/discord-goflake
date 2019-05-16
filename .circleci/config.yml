@@ -12,6 +12,7 @@ jobs:
       - run: gotestsum --junitfile /tmp/test-results/unit-tests.xml --format standard-verbose
       - store_test_results:
           path: /tmp/test-results
+      - run: go get github.com/schrej/godacov
       - run: go test -coverprofile=coverage.out
       - run: godacov -t $CODACY -r ./coverage.out -c $CIRCLE_SHA1
       - run: go test -bench=.
