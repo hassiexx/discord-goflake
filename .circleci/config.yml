@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.12.4
+      - image: hassieswift621/circleci-go-codacy:1.12.5
       
     working_directory: /go/src/github.com/hassieswift621/discord-goflake
     
