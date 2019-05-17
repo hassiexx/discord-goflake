@@ -12,5 +12,5 @@ jobs:
       - run: gotestsum --junitfile /tmp/test-results/unit-tests.xml --format standard-verbose
       - store_test_results:
           path: /tmp/test-results
-      - run: coverage
+      - run: coverage.sh
       - run: go test -bench=.
