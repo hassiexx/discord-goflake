@@ -14,5 +14,5 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
       - run: alias
-      - run: coverage.sh
+      - run: coverage
       - run: go test -bench=.
