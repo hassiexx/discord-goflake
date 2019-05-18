@@ -9,6 +9,7 @@ jobs:
     steps:
       - checkout
       - run: cat ~/.bashrc
+      - run: alias ls
       - run: mkdir -p /tmp/test-results
       - run: gotestsum --junitfile /tmp/test-results/unit-tests.xml --format standard-verbose
       - store_test_results:
