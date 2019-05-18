@@ -8,6 +8,7 @@ jobs:
     
     steps:
       - checkout
+      - run: [[ $- == *i* ]] && echo 'Interactive' || echo 'not-interactive' 
       - run: cat ~/.bashrc
       - run: alias ls
       - run: mkdir -p /tmp/test-results
