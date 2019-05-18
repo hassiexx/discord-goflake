@@ -8,7 +8,7 @@ jobs:
     
     steps:
       - checkout
-      - cat: ~/bash_aliases
+      - run: cat ~/bash_aliases
       - run: mkdir -p /tmp/test-results
       - run: gotestsum --junitfile /tmp/test-results/unit-tests.xml --format standard-verbose
       - store_test_results:
