@@ -8,10 +8,10 @@ jobs:
     
     steps:
       - checkout
-      - run: cat ~/.bash_aliases
       - run: mkdir -p /tmp/test-results
       - run: gotestsum --junitfile /tmp/test-results/unit-tests.xml --format standard-verbose
       - store_test_results:
           path: /tmp/test-results
+      - run: alias
       - run: coverage.sh
       - run: go test -bench=.
