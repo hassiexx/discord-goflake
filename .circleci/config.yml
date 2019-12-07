@@ -21,6 +21,9 @@ commands:
     steps:
       - run: goverage -v -coverprofile=coverage.out ./...
       - run: godacov -t $CODACY_PROJECT_TOKEN -r ./coverage.out -c $CIRCLE_SHA1
+  bench:
+    description: "Benchmark"
+      - run: go test -bench=.
 
 jobs:
   build:
@@ -33,3 +36,4 @@ jobs:
       - go/save-cache
       - test
       - coverage
+      - bench
