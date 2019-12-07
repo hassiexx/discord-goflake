@@ -22,7 +22,7 @@ func TestParseString(t *testing.T) {
 	}
 }
 
-func TestParseStringError(t *testing.T) {
+func TestParseStringInvalid(t *testing.T) {
 	id := "57745267804995584X"
 	_, err := ParseString(id)
 	if err == nil {
