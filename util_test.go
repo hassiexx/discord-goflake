@@ -22,6 +22,14 @@ func TestParseString(t *testing.T) {
 	}
 }
 
+func TestParseStringError(t *testing.T) {
+	id := "57745267804995584X"
+	_, err := ParseString(id)
+	if err == nil {
+		t.Errorf("expected error for invalid id")
+	}
+}
+
 func TestParseEpochMilli(t *testing.T) {
 	var id uint64 = 576769138849218561
 	var epoch uint64 = 1557582878554
@@ -32,6 +40,14 @@ func TestParseEpochMilli(t *testing.T) {
 	} else if expected.Timestamp().String() != actual.Timestamp().String() {
 		t.Errorf("failed to parse snowflake from epoch ms %d: expected %s, got %s", epoch, expected.Timestamp().String(),
 			actual.Timestamp().String())
+	}
+}
+
+func TestParseEpochMilliEarlier(t *testing.T) {
+	var epoch uint64 = 1420070300000
+	_, err := ParseEpochMilli(epoch)
+	if err == nil {
+		t.Errorf("expected error for epoch being earlier than Discord's epoch")
 	}
 }
 
