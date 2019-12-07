@@ -18,7 +18,7 @@ func (s *Snowflake) Int64() int64 {
 	return int64(s.id)
 }
 
-// Increment gets the increment number which is incremented every time a ID is generated on the process.
+// Increment gets the increment number for this snowflake.
 func (s *Snowflake) Increment() uint64 {
 	return s.id & 0xFFF
 }
