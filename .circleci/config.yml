@@ -3,18 +3,24 @@ version: 2.1
 orbs:
   go: circleci/go@0.2.0
 
-
 commands:
   get-coverage-tools:
     description: "Get coverage tools"
     steps:
       - run: go get -u github.com/schrej/godacov
       - run: go get -u github.com/haya14busa/goverage
-  coverage:
-    description: "Generate and upload coverage"
+  test:
+    description: "Run tests and store results on CircleCI"
     steps:
-      - goverage -v -coverprofile=coverage.out ./...
-      - godacov -t $CODACY_PROJECT_TOKEN -r ./coverage.out -c $CIRCLE_SHA1
+      - run: mkdir -p /tmp/test-results
+      - run: gotestsum --junitfile /tmp/test-results/unit-tests.xml --format standard-verbose
+      - store_test_results:
+          path: /tmp/test-results
+  coverage:
+    description: "Generate and upload coverage to Codacy"
+    steps:
+      - run: goverage -v -coverprofile=coverage.out ./...
+      - run: godacov -t $CODACY_PROJECT_TOKEN -r ./coverage.out -c $CIRCLE_SHA1
 
 jobs:
   build:
@@ -25,5 +31,5 @@ jobs:
       - go/mod-download
       - get-coverage-tools
       - go/save-cache
-      - go/test
+      - test
       - coverage
