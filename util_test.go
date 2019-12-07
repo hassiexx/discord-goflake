@@ -8,7 +8,7 @@ func TestParseInt(t *testing.T) {
 	var id uint64 = 577637225211101206
 	snowflake := ParseInt(id)
 	if snowflake.UInt64() != id {
-		t.Errorf("Failed to parse snowflake from int %d", id)
+		t.Errorf("failed to parse snowflake from int %d", id)
 	}
 }
 
@@ -16,9 +16,9 @@ func TestParseString(t *testing.T) {
 	id := "577452678049955841"
 	snowflake, err := ParseString(id)
 	if err != nil {
-		t.Errorf("Failed to parse snowflake from string %s", id)
+		t.Errorf("failed to parse snowflake from string %s: %v", id, err)
 	} else if snowflake.String() != id {
-		t.Errorf("Failed to parse snowflake from string %s, got %s instead", id, snowflake.String())
+		t.Errorf("failed to parse snowflake from string %s: got %s", id, snowflake.String())
 	}
 }
 
@@ -28,9 +28,9 @@ func TestParseEpochMilli(t *testing.T) {
 	expected := ParseInt(id)
 	actual, err := ParseEpochMilli(epoch)
 	if err != nil {
-		t.Errorf("Failed to parse snowflake from epoch ms %d", epoch)
+		t.Errorf("failed to parse snowflake from epoch ms %d: %v", epoch, err)
 	} else if expected.Timestamp().String() != actual.Timestamp().String() {
-		t.Errorf("Failed to parse snowflake from epoch ms %d, expected %s, got %s", epoch, expected.Timestamp().String(),
+		t.Errorf("failed to parse snowflake from epoch ms %d: expected %s, got %s", epoch, expected.Timestamp().String(),
 			actual.Timestamp().String())
 	}
 }
@@ -39,9 +39,9 @@ func TestParseEpochSec(t *testing.T) {
 	var epoch uint64 = 1557793289
 	snowflake, err := ParseEpochSec(epoch)
 	if err != nil {
-		t.Errorf("Failed to parse snowflake from epoch sec %d", epoch)
+		t.Errorf("failed to parse snowflake from epoch sec %d: %v", epoch, err)
 	} else if int64(epoch) != snowflake.Timestamp().Unix() {
-		t.Errorf("Failed to parse snowflake from epoch s %d, expected %d, got %d", epoch, epoch,
+		t.Errorf("failed to parse snowflake from epoch s %d: expected %d, got %d", epoch, epoch,
 			snowflake.Timestamp().Unix())
 	}
 }
