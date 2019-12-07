@@ -2,6 +2,8 @@ package dgoflake
 
 import (
 	"strconv"
+
+	"golang.org/x/xerrors"
 )
 
 // ParseInt parses an int to a snowflake.
@@ -13,7 +15,7 @@ func ParseInt(id uint64) *Snowflake {
 func ParseString(id string) (*Snowflake, error) {
 	i, err := strconv.ParseUint(id, 10, 64)
 	if err != nil {
-		return nil, newError("Failed to parse string:", err)
+		return nil, xerrors.Errorf("dgoflake: failed to parse string to snowflake: %w", err)
 	}
 	return &Snowflake{i}, nil
 }
@@ -21,7 +23,7 @@ func ParseString(id string) (*Snowflake, error) {
 // ParseEpochMilli parses an epoch milliseconds timestamp to a snowflake.
 func ParseEpochMilli(epoch uint64) (*Snowflake, error) {
 	if epoch < DiscordEpoch {
-		return nil, newError("Epoch cannot be earlier than the Discord epoch.", nil)
+		return nil, xerrors.New("dgoflake: epoch cannot be earlier than the Discord epoch")
 	}
 	return &Snowflake{(epoch - DiscordEpoch) << 22}, nil
 }
