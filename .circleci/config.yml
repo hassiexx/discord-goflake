@@ -23,6 +23,7 @@ commands:
       - run: godacov -t $CODACY_PROJECT_TOKEN -r ./coverage.out -c $CIRCLE_SHA1
   bench:
     description: "Benchmark"
+    steps:
       - run: go test -bench=.
 
 jobs:
