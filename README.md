@@ -1,5 +1,5 @@
 # Discord Goflake
-[![CircleCI](https://img.shields.io/circleci/build/github/hassieswift621/discord-goflake?logo=circleci&style=flat-square)](https://circleci.com/gh/hassieswift621/tatsumaki-go)
+[![CircleCI](https://img.shields.io/circleci/build/github/hassieswift621/discord-goflake?logo=circleci&style=flat-square)](https://circleci.com/gh/hassieswift621/discord-goflake)
 [![Codacy grade](https://img.shields.io/codacy/grade/13bd27ca8f1f41ee9cad4c7040ea127a?logo=codacy&style=flat-square)](https://www.codacy.com/manual/hassieswift621/discord-goflake?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hassieswift621/discord-goflake&amp;utm_campaign=Badge_Grade)
 [![Codacy coverage](https://img.shields.io/codacy/coverage/13bd27ca8f1f41ee9cad4c7040ea127a?logo=codacy&style=flat-square)](https://www.codacy.com/manual/hassieswift621/discord-goflake?utm_source=github.com&utm_medium=referral&utm_content=hassieswift621/discord-goflake&utm_campaign=Badge_Coverage)
 [![Godoc reference](https://img.shields.io/badge/godoc-reference-blue?style=flat-square&logo=go)](https://godoc.org/github.com/hassieswift621/discord-goflake)
