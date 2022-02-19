@@ -15,9 +15,9 @@ commands:
   coverage:
     description: "Generate and upload coverage to Codacy"
     steps:
-      - run: go test -coverprofile=coverage.out
+      - run: go test -coverprofile=coverage
       - coverage-reporter/send_report:
-          coverage-reports: coverage.out
+          coverage-reports: coverage
           project-token: $CODACY_PROJECT_TOKEN
   bench:
     description: "Benchmark"
