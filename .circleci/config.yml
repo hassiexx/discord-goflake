@@ -33,7 +33,6 @@ jobs:
       - checkout
       - go/load-cache
       - go/mod-download
-      - get-coverage-tools
       - go/save-cache
       - test
       - coverage
