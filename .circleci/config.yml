@@ -2,13 +2,9 @@ version: 2.1
 
 orbs:
   go: circleci/go@1.7.0
+  coverage-reporter: codacy/coverage-reporter@13.5.6
 
 commands:
-  get-coverage-tools:
-    description: "Get coverage tools"
-    steps:
-      - run: go get -u github.com/schrej/godacov
-      - run: go get -u github.com/haya14busa/goverage
   test:
     description: "Run tests and store results on CircleCI"
     steps:
@@ -19,8 +15,10 @@ commands:
   coverage:
     description: "Generate and upload coverage to Codacy"
     steps:
-      - run: goverage -v -coverprofile=coverage.out ./...
-      - run: godacov -t $CODACY_PROJECT_TOKEN -r ./coverage.out -c $CIRCLE_SHA1
+      - run: go test -coverprofile=coverage.out
+      - coverage-reporter/send_report:
+          coverage-reports: coverage.out
+          project-token: $CODACY_PROJECT_TOKEN
   bench:
     description: "Benchmark"
     steps:
