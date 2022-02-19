@@ -13,12 +13,14 @@ commands:
       - store_test_results:
           path: /tmp/test-results
   coverage:
-    description: "Generate and upload coverage to Codacy"
+    description: "Codacy coverage"
     steps:
-      - run: go test -coverprofile=coverage
-      - coverage-reporter/send_report:
-          coverage-reports: coverage
-          project-token: $CODACY_PROJECT_TOKEN
+      - run: |
+        CODACY_LATEST_VERSION="$(curl -Ls https://artifacts.codacy.com/bin/codacy-coverage-reporter/latest)"
+        curl -Ls -o codacy-coverage-reporter "https://artifacts.codacy.com/bin/codacy-coverage-reporter/${CODACY_LATEST_VERSION}/codacy-coverage-reporter-linux"
+        chmod +x codacy-coverage-reporter
+        go test -coverprofile=coverage.out
+        ./codacy-coverage-reporter --force-coverage-parser go -r coverage.out
   bench:
     description: "Benchmark"
     steps:
