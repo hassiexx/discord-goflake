@@ -28,7 +28,9 @@ commands:
 
 jobs:
   build:
-    executor: go/default
+    executor:
+      name: go/default
+      tag: '1.17'
     steps:
       - checkout
       - go/load-cache
